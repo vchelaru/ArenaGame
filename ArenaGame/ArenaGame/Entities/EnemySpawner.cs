@@ -20,6 +20,7 @@ using GuiManager = FlatRedBall.Gui.GuiManager;
 using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
+using ArenaGame.DataTypes;
 
 #endif
 #endregion
@@ -28,6 +29,8 @@ namespace ArenaGame.Entities
 {
 	public partial class EnemySpawner
 	{
+        double lastSpawn;
+
         /// <summary>
         /// Initialization logic which is execute only one time for this Entity (unless the Entity is pooled).
         /// This method is called when the Entity is added to managers. Entities which are instantiated but not
@@ -41,9 +44,20 @@ namespace ArenaGame.Entities
 
 		private void CustomActivity()
 		{
-
+            TryPerformSpawn();
 
 		}
+
+        private void TryPerformSpawn()
+        {
+            bool shouldSpawn = TimeManager.SecondsSince(lastSpawn) > 5;
+            if(shouldSpawn)
+            {
+                lastSpawn = TimeManager.CurrentTime;
+
+                SpawnEnemy(GlobalContent.EnemyInfo[EnemyInfo.TestMonster]);
+            }
+        }
 
 		private void CustomDestroy()
 		{
@@ -56,5 +70,15 @@ namespace ArenaGame.Entities
 
 
         }
+
+        void SpawnEnemy(EnemyInfo enemyType)
+        {
+            var newEnemy = Factories.EnemyFactory.CreateNew(this.LayerProvidedByContainer);
+            newEnemy.Position = this.AxisAlignedRectangleInstance.GetRandomPositionInThis();
+
+            newEnemy.EnemyInfo = enemyType;
+
+        }
+
 	}
 }

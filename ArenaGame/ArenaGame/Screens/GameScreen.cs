@@ -34,7 +34,12 @@ namespace ArenaGame.Screens
 		{
             DebugInitialize();
 
+            Factories.EnemyFactory.EntitySpawned = HandleEnemySpawned;
+        }
 
+        private void HandleEnemySpawned(Entities.Enemy newEnemy)
+        {
+            newEnemy.AcquireTarget(this.CharacterList);
         }
 
         private void DebugInitialize()
@@ -49,8 +54,6 @@ namespace ArenaGame.Screens
 
                 this.TestCharacter1.RangedAttack = InputManager.Keyboard.GetKey(Keys.R);
                 this.TestCharacter1.MeleeAttack = InputManager.Keyboard.GetKey(Keys.Space);
-
-                this.TestEnemy1.AcquireTarget(this.CharacterList);
             }
             else
             {
@@ -66,7 +69,6 @@ namespace ArenaGame.Screens
                 this.TestCharacter2.MeleeAttack = second.GetButton(Xbox360GamePad.Button.A);
 
 
-                this.TestEnemy1.AcquireTarget(this.CharacterList);
             }
         }
 
@@ -88,6 +90,28 @@ namespace ArenaGame.Screens
                     }
                 }
             }
+
+            foreach (var enemy in this.EnemyList)
+            {
+                foreach(var otherEnemy in this.EnemyList)
+                { 
+                    if(enemy != otherEnemy)
+                    {
+                        enemy.CollideAgainstMove(otherEnemy, 1, 1);
+                    }
+                }
+
+                foreach(var character in this.CharacterList)
+                {
+                    if(character.CollideAgainst(enemy))
+                    {
+                        // kill them?
+                    }
+                }
+
+            }
+
+
 
             foreach(var character in this.CharacterList)
             {

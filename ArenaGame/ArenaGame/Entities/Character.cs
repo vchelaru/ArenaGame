@@ -42,6 +42,7 @@ namespace ArenaGame.Entities
         
         List<AttackEffectBase> meleeAttackEffects = new List<AttackEffectBase>();
         List<AttackEffectBase> rangedAttackEffects = new List<AttackEffectBase>();
+        Vector2 analogDirection;
 
         public I2DInput Movement { get; set; }
         public IPressableInput MeleeAttack { get; set; }
@@ -58,11 +59,6 @@ namespace ArenaGame.Entities
             get;
             set;
 
-        }
-        public Vector2 AnalogDirection
-        {
-            get;
-            private set;
         }
 
         /// <summary>
@@ -81,7 +77,7 @@ namespace ArenaGame.Entities
             this.rangedAttackEffects.Add(instantDamage);
 
             this.Direction = Entities.Direction.Right;
-            this.AnalogDirection = Vector2.UnitX;
+            this.analogDirection = Vector2.UnitX;
 		}
 
 		private void CustomActivity()
@@ -127,8 +123,8 @@ namespace ArenaGame.Entities
             // just keep the old value
             if (isMoving)
             {
-                AnalogDirection = inputVelocity;
-
+                analogDirection = inputVelocity;
+                analogDirection.Normalize();
                 bool isMovingHorizontally = Math.Abs(this.XVelocity) > Math.Abs(this.YVelocity);
 
                 if (isMovingHorizontally)
@@ -198,25 +194,7 @@ namespace ArenaGame.Entities
 
             const float projectileSpeed = 400;
 
-            switch (this.Direction)
-            {
-                case Direction.Up:
-                    attackArea.YVelocity = projectileSpeed;
-                    break;
-                case Direction.Down:
-                    attackArea.YVelocity = -projectileSpeed;
-
-                    break;
-                case Direction.Left:
-                    attackArea.XVelocity = -projectileSpeed;
-
-                    break;
-                case Direction.Right:
-                    attackArea.XVelocity = projectileSpeed;
-
-                    break;
-            }
-
+            attackArea.Velocity = new Vector3(analogDirection * projectileSpeed, 0);
             const float secondsLasting = 1;
             attackArea.Call(attackArea.Destroy).After(secondsLasting);
         }

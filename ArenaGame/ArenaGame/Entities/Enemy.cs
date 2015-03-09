@@ -74,9 +74,13 @@ namespace ArenaGame.Entities
             if(target != null)
             {
                 var directionVector = new Vector2(this.target.X - this.X, this.target.Y - this.Y);
-                directionVector.Normalize();
 
-                this.Velocity = new Vector3(directionVector * this.EnemyInfo.Speed, 0);
+                if (directionVector.LengthSquared() > 0)
+                {
+                    directionVector.Normalize();
+
+                    this.Velocity = new Vector3(directionVector * this.EnemyInfo.Speed, 0);
+                }
             }
         }
 

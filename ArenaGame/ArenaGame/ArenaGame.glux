@@ -46,25 +46,6 @@
           <SourceClassGenericType>Entities\Enemy</SourceClassGenericType>
           <InstanceName>EnemyList</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <ContainedObjects>
-            <NamedObjectSave>
-              <CustomProperty>
-                <Type>float</Type>
-                <Member>X</Member>
-                <ValueAsFloat>200</ValueAsFloat>
-              </CustomProperty>
-              <CustomProperty>
-                <Type>Object</Type>
-                <Member>EnemyInfo</Member>
-                <ValueAsString>TestMonster in EnemyInfo.csv</ValueAsString>
-              </CustomProperty>
-              <SourceType>Entity</SourceType>
-              <SourceClassType>Entities\Enemy</SourceClassType>
-              <InstanceName>TestEnemy1</InstanceName>
-              <AttachToContainer>true</AttachToContainer>
-              <IndependentOfCamera>true</IndependentOfCamera>
-            </NamedObjectSave>
-          </ContainedObjects>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
@@ -73,6 +54,38 @@
           <SourceClassGenericType>Entities\AttackArea</SourceClassGenericType>
           <InstanceName>AttackAreaList</InstanceName>
           <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>PositionedObjectList&lt;T&gt;</SourceClassType>
+          <SourceClassGenericType>Entities\EnemySpawner</SourceClassGenericType>
+          <InstanceName>EnemySpawnerList</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
+          <ContainedObjects>
+            <NamedObjectSave>
+              <CustomProperty>
+                <Type>float</Type>
+                <Member>X</Member>
+                <ValueAsFloat>150</ValueAsFloat>
+              </CustomProperty>
+              <CustomProperty>
+                <Type>float</Type>
+                <Member>Width</Member>
+                <ValueAsFloat>50</ValueAsFloat>
+              </CustomProperty>
+              <CustomProperty>
+                <Type>float</Type>
+                <Member>Height</Member>
+                <ValueAsFloat>150</ValueAsFloat>
+              </CustomProperty>
+              <SourceType>Entity</SourceType>
+              <SourceClassType>Entities\EnemySpawner</SourceClassType>
+              <InstanceName>TestSpawner</InstanceName>
+              <AttachToContainer>true</AttachToContainer>
+              <IndependentOfCamera>true</IndependentOfCamera>
+            </NamedObjectSave>
+          </ContainedObjects>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
@@ -335,8 +348,56 @@
           <Name>Z</Name>
           <Type>float</Type>
         </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>Width</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">32</DefaultValue>
+          <SourceObject>AxisAlignedRectangleInstance</SourceObject>
+          <SourceObjectProperty>Width</SourceObjectProperty>
+        </CustomVariable>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>float</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>Height</Name>
+          <Type>float</Type>
+          <DefaultValue xsi:type="xsd:float">32</DefaultValue>
+          <SourceObject>AxisAlignedRectangleInstance</SourceObject>
+          <SourceObjectProperty>Height</SourceObjectProperty>
+        </CustomVariable>
       </CustomVariables>
       <Name>Entities\EnemySpawner</Name>
+      <NamedObjects>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Width</Member>
+            <ValueAsFloat>32</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>Height</Member>
+            <ValueAsFloat>32</ValueAsFloat>
+          </CustomProperty>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceFile />
+          <SourceName />
+          <SourceClassType>AxisAlignedRectangle</SourceClassType>
+          <InstanceName>AxisAlignedRectangleInstance</InstanceName>
+          <HasPublicProperty>true</HasPublicProperty>
+          <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+      </NamedObjects>
       <Is2D>true</Is2D>
     </EntitySave>
   </Entities>
