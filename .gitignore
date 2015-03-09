@@ -7,3 +7,4 @@ ArenaGame/ArenaGameContent/obj/
 *.csvSettings
 *.cachefile
 *.Generated.Event.cs
+ArenaGame.jmconfig
