@@ -62,11 +62,24 @@ namespace ArenaGame.Entities
         /// added to managers will not have this method called.
         /// </summary>
 		private void CustomInitialize()
-		{
-            // temp!
-            this.Health = 100;
+        {
+            AttackEffectBase instantDamage;
+            if (Profile != null)
+            {
+                // TODO: Figure out how the profile modifies runtime game values:
+                // We need some way to define how each speedstat value affects your runtime speed float, and how to 
+                // upgrade your attackeffectbase objects based on the melee & ranged stat modifiers, etc.
+                this.Health = Profile.HealthStat;
+                this.Speed = Profile.SpeedStat;
+                instantDamage = new InstantDamage {Amount = Profile.MeleeStat};
+            }
+            else
+            {
+                this.Health = 100;
+                instantDamage = new InstantDamage {Amount = 10};
+            }
 
-            var instantDamage = new InstantDamage {Amount = 10};
+
             this.meleeAttackEffects.Add(instantDamage);
             this.rangedAttackEffects.Add(instantDamage);
 

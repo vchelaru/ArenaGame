@@ -119,6 +119,7 @@
     <Compile Include="DataTypes\AttackEffects\AttackEffectBase.cs" />
     <Compile Include="DataTypes\AttackEffects\InstantDamage.cs" />
     <Compile Include="DataTypes\EnemyInfo.Generated.cs" />
+    <Compile Include="DataTypes\Level1Info.Generated.cs" />
     <Compile Include="DataTypes\TileMapInfo.Generated.cs" />
     <Compile Include="Entities\AttackArea.cs" />
     <Compile Include="Entities\AttackArea.Generated.cs">

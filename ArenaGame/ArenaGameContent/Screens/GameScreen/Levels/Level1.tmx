@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="64" height="48" tilewidth="16" tileheight="16" nextobjectid="1">
  <tileset firstgid="1" name="zelda-tiles" tilewidth="16" tileheight="16">
-  <image source="zelda-tiles.png" width="2048" height="2048"/>
+  <image source="..\..\..\zelda-tiles.png" width="2048" height="2048"/>
  </tileset>
  <layer name="ground" width="64" height="48">
   <data encoding="base64" compression="zlib">
@@ -20,7 +20,7 @@
  </layer>
  <layer name="spawners" width="64" height="48">
   <data encoding="base64" compression="zlib">
-   eJzt2sEJADAIBEEbsf82U0MCBuFmwAL2e1j1X18eAAAAAMCL5H0xfV/Vr19/ruR2AAAAAGDGpv/3A/03BBU=
+   eJzt2sEJADAIBEE7s/+uUkMCBuFmwAL2e1j1X18eAAAAAMCL5H0xfV/Vr19/ruR2AAAAAGDGpv/3A6dECN0=
   </data>
  </layer>
 </map>

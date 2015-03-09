@@ -35,6 +35,8 @@ namespace ArenaGame.Screens
             DebugInitialize();
 
             Factories.EnemyFactory.EntitySpawned = HandleEnemySpawned;
+
+            InitializeLevel("Level1");
         }
 
         private void HandleEnemySpawned(Entities.Enemy newEnemy)

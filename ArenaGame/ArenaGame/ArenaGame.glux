@@ -14,7 +14,38 @@
         <string>GLUE</string>
       </Tags>
       <Source>GLUE</Source>
+      <CustomVariables>
+        <CustomVariable>
+          <Properties>
+            <PropertySave>
+              <Name>Type</Name>
+              <ValueAsString>bool</ValueAsString>
+            </PropertySave>
+          </Properties>
+          <Name>UsesTmxLevelFiles</Name>
+          <Type>bool</Type>
+          <DefaultValue xsi:type="xsd:boolean">true</DefaultValue>
+        </CustomVariable>
+      </CustomVariables>
       <Name>Screens\GameScreen</Name>
+      <ReferencedFiles>
+        <ReferencedFileSave>
+          <Name>Screens/GameScreen/Levels/Level1.tilb</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <LoadedOnlyWhenReferenced>true</LoadedOnlyWhenReferenced>
+          <SourceFile>Screens/GameScreen/Levels/Level1.tmx</SourceFile>
+          <BuildTool>*.tmx -&gt; TmxToScnx.exe -&gt; *.tilb</BuildTool>
+          <AdditionalArguments>copyimages=false</AdditionalArguments>
+          <RuntimeType>FlatRedBall.TileGraphics.LayeredTileMap</RuntimeType>
+        </ReferencedFileSave>
+        <ReferencedFileSave>
+          <Name>Screens/GameScreen/Tilesets/Level1Info.csv</Name>
+          <IsSharedStatic>true</IsSharedStatic>
+          <LoadedOnlyWhenReferenced>true</LoadedOnlyWhenReferenced>
+          <SourceFile>Screens/GameScreen/Levels/Level1.tmx</SourceFile>
+          <BuildTool>*.tmx -&gt; TmxToCSV.exe -&gt; *.csv</BuildTool>
+        </ReferencedFileSave>
+      </ReferencedFiles>
       <NamedObjects>
         <NamedObjectSave>
           <SourceType>FlatRedBallType</SourceType>
@@ -86,6 +117,13 @@
               <IndependentOfCamera>true</IndependentOfCamera>
             </NamedObjectSave>
           </ContainedObjects>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceClassType>TileShapeCollection</SourceClassType>
+          <InstanceName>SolidCollisions</InstanceName>
+          <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
@@ -380,12 +418,12 @@
         <NamedObjectSave>
           <CustomProperty>
             <Type>float</Type>
-            <Member>Width</Member>
+            <Member>Height</Member>
             <ValueAsFloat>32</ValueAsFloat>
           </CustomProperty>
           <CustomProperty>
             <Type>float</Type>
-            <Member>Height</Member>
+            <Member>Width</Member>
             <ValueAsFloat>32</ValueAsFloat>
           </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
@@ -423,7 +461,9 @@
   <IgnoredDirectories />
   <CustomClasses>
     <CustomClassSave>
-      <CsvFilesUsingThis />
+      <CsvFilesUsingThis>
+        <string>Screens/GameScreen/Tilesets/Level1Info.csv</string>
+      </CsvFilesUsingThis>
       <RequiredProperties>
         <InstructionSave>
           <Type>bool</Type>
