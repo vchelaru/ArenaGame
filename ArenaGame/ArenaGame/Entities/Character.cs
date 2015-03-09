@@ -90,12 +90,50 @@ namespace ArenaGame.Entities
 		private void CustomActivity()
 		{
             InputActivity();
+		    AnimationActivity();
 
             AttachableEffectActivity();
 		}
 
+	    private void AnimationActivity()
+	    {
+            SetAnimations(CharacterAnimations);
+	    }
 
-        private void AttachableEffectActivity()
+        public virtual void SetAnimations(AnimationChainList animations)
+        {
+            if (this.MainSprite != null)
+            {
+                string chainToSet = GetChainToSet();
+
+                if (!string.IsNullOrEmpty(chainToSet))
+                {
+                    bool differs = MainSprite.CurrentChainName == null ||
+                        MainSprite.CurrentChainName != chainToSet;
+
+                    if (differs)
+                    {
+                        this.MainSprite.SetAnimationChain(animations[chainToSet]);
+                    }
+                }
+            }
+        }
+
+	    private string GetChainToSet()
+	    {
+	        string animationType = "Idle";
+
+	        bool isMoving = Velocity.LengthSquared() > 0;
+	        if (isMoving)
+	        {
+	            animationType = "Walk";
+	        }
+
+	        return animationType + Direction;
+
+	    }
+
+	    private void AttachableEffectActivity()
         {
             foreach (var item in this.Effects)
             {

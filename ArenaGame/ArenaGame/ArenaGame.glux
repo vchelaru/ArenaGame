@@ -55,6 +55,11 @@
           <AttachToContainer>true</AttachToContainer>
           <ContainedObjects>
             <NamedObjectSave>
+              <CustomProperty>
+                <Type>float</Type>
+                <Member>Z</Member>
+                <ValueAsFloat>3</ValueAsFloat>
+              </CustomProperty>
               <SourceType>Entity</SourceType>
               <SourceClassType>Entities\Character</SourceClassType>
               <InstanceName>TestCharacter1</InstanceName>
@@ -62,6 +67,11 @@
               <IndependentOfCamera>true</IndependentOfCamera>
             </NamedObjectSave>
             <NamedObjectSave>
+              <CustomProperty>
+                <Type>float</Type>
+                <Member>Z</Member>
+                <ValueAsFloat>1</ValueAsFloat>
+              </CustomProperty>
               <SourceType>Entity</SourceType>
               <SourceClassType>Entities\Character</SourceClassType>
               <InstanceName>TestCharacter2</InstanceName>
@@ -232,12 +242,41 @@
             <Member>Radius</Member>
             <ValueAsFloat>16</ValueAsFloat>
           </CustomProperty>
+          <CustomProperty>
+            <Type>bool</Type>
+            <Member>Visible</Member>
+            <ValueAsBool>false</ValueAsBool>
+          </CustomProperty>
           <SourceType>FlatRedBallType</SourceType>
           <SourceFile />
           <SourceName />
           <SourceClassType>Circle</SourceClassType>
           <InstanceName>CircleInstance</InstanceName>
           <HasPublicProperty>true</HasPublicProperty>
+          <AttachToContainer>true</AttachToContainer>
+          <IndependentOfCamera>true</IndependentOfCamera>
+        </NamedObjectSave>
+        <NamedObjectSave>
+          <CustomProperty>
+            <Type>float</Type>
+            <Member>TextureScale</Member>
+            <ValueAsFloat>1</ValueAsFloat>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>AnimationChainList</Type>
+            <Member>AnimationChains</Member>
+            <ValueAsString>CharacterAnimations</ValueAsString>
+          </CustomProperty>
+          <CustomProperty>
+            <Type>string</Type>
+            <Member>CurrentChainName</Member>
+            <ValueAsString>IdleRight</ValueAsString>
+          </CustomProperty>
+          <SourceType>FlatRedBallType</SourceType>
+          <SourceFile />
+          <SourceName />
+          <SourceClassType>Sprite</SourceClassType>
+          <InstanceName>MainSprite</InstanceName>
           <AttachToContainer>true</AttachToContainer>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
