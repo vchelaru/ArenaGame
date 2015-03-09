@@ -30,7 +30,12 @@ using Microsoft.Xna.Framework;
 namespace ArenaGame.Entities
 {
     public partial class Enemy : ICharacter
-	{
+    {
+        public float CollisionRadius
+        {
+            get { return this.CircleInstance.Radius; }
+        }
+
         public Direction Direction
         {
             get;

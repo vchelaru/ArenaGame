@@ -87,44 +87,66 @@ namespace ArenaGame.Screens
 
         private void PerformCollisisionActivity()
         {
-            foreach(var area in this.AttackAreaList)
+            EnemyList.SortXInsertionAscending();
+            var maxXSeparation = 0f;
+            if (EnemyList.Count > 0)
             {
-                foreach(var enemy in this.EnemyList)
+                maxXSeparation = EnemyList[0].CollisionRadius*2;
+            }
+
+            for (int index = 0; index < this.AttackAreaList.Count; index++)
+            {
+                var area = this.AttackAreaList[index];
+                for (int i = 0; i < this.EnemyList.Count; i++)
                 {
-                    if(area.CollideAgainst(enemy))
+                    var enemy = this.EnemyList[i];
+                    if (area.CollideAgainst(enemy))
                     {
                         area.HandleCollideWith(enemy);
                     }
                 }
             }
 
-            foreach (var enemy in this.EnemyList)
+            var collisionCount = 0;
+            var enemyListCount = this.EnemyList.Count;
+            for (int index = 0; index < enemyListCount - 1; index++)
             {
-                foreach(var otherEnemy in this.EnemyList)
-                { 
-                    if(enemy != otherEnemy)
+                var enemy = this.EnemyList[index];
+                for (int i = index + 1; i < enemyListCount; i++)
+                {
+                    var otherEnemy = this.EnemyList[i];
+
+                    if (otherEnemy.X - enemy.X < maxXSeparation)
                     {
+                        collisionCount++;
                         enemy.CollideAgainstMove(otherEnemy, 1, 1);
+                    }
+                    else
+                    {
+                        break;
                     }
                 }
 
-                foreach(var character in this.CharacterList)
+                for (int i = 0; i < this.CharacterList.Count; i++)
                 {
-                    if(character.CollideAgainst(enemy))
+                    var character = this.CharacterList[i];
+                    if (character.CollideAgainst(enemy))
                     {
                         // kill them?
                     }
                 }
-
             }
 
+            FlatRedBall.Debugging.Debugger.Write(collisionCount);
 
 
-            foreach(var character in this.CharacterList)
+            for (int index = 0; index < this.CharacterList.Count; index++)
             {
-                foreach(var otherCharacter in this.CharacterList)
+                var character = this.CharacterList[index];
+                for (int i = 0; i < this.CharacterList.Count; i++)
                 {
-                    if(character != otherCharacter)
+                    var otherCharacter = this.CharacterList[i];
+                    if (character != otherCharacter)
                     {
                         character.CollideAgainstMove(otherCharacter, 1, 1);
                     }
