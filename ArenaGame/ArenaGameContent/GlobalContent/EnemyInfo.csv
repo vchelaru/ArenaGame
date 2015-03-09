@@ -1,0 +1,2 @@
+"Name (string, required)",Health (int),Speed (float)
+TestMonster,25,30

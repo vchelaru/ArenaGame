@@ -1,0 +1,9 @@
+ArenaGame.v12.suo
+ArenaGame/ArenaGame/bin/
+.Generated.cs
+*.Generated.cs
+ArenaGame/ArenaGame/obj/
+ArenaGame/ArenaGameContent/obj/
+*.csvSettings
+*.cachefile
+*.Generated.Event.cs
