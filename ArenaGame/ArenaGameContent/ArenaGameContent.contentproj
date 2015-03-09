@@ -45,6 +45,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Entities\Character\CharacterAnimations.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>CharacterAnimations</Name>
+    </None>
+    <None Include="Entities\Enemy\EnemyAnimations.achx">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>EnemyAnimations</Name>
+    </None>
     <None Include="GlobalContent\EnemyInfo.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>EnemyInfo</Name>
