@@ -11,6 +11,8 @@ namespace ArenaGame.Entities.Interfaces
         int Health { get; set; }
         List<AttachableEffect> Effects { get; }
 
+        float X { get; }
+        float Y { get; }
 
     }
 }

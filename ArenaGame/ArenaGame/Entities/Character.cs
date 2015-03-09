@@ -22,6 +22,7 @@ using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using ArenaGame.Entities.Interfaces;
 using ArenaGame.DataTypes.AttackEffects;
+using Microsoft.Xna.Framework;
 
 #endif
 #endregion
@@ -38,18 +39,30 @@ namespace ArenaGame.Entities
 
 	public partial class Character : ICharacter
 	{
+        
         List<AttackEffectBase> meleeAttackEffects = new List<AttackEffectBase>();
-        List<AttackEffectBase> missileAttackEffects = new List<AttackEffectBase>();
+        List<AttackEffectBase> rangedAttackEffects = new List<AttackEffectBase>();
 
         public I2DInput Movement { get; set; }
         public IPressableInput MeleeAttack { get; set; }
         public IPressableInput RangedAttack { get; set; }
+        
+        public int Health
+        {
+            get;
+            set;
+        }
 
         public Direction Direction
         {
             get;
             set;
 
+        }
+        public Vector2 AnalogDirection
+        {
+            get;
+            private set;
         }
 
         /// <summary>
@@ -65,7 +78,10 @@ namespace ArenaGame.Entities
             var instantDamage = new InstantDamage();
             instantDamage.Amount = 10;
             this.meleeAttackEffects.Add(instantDamage);
+            this.rangedAttackEffects.Add(instantDamage);
 
+            this.Direction = Entities.Direction.Right;
+            this.AnalogDirection = Vector2.UnitX;
 		}
 
 		private void CustomActivity()
@@ -89,7 +105,7 @@ namespace ArenaGame.Entities
             this.XVelocity = Movement.X * Speed;
             this.YVelocity = Movement.Y * Speed;
 
-            AssignDirectionFromVelocity();
+            AssignDirectionFromInput(Movement);
 
             if(MeleeAttack.WasJustPressed)
             {
@@ -101,14 +117,17 @@ namespace ArenaGame.Entities
             }
         }
 
-        private void AssignDirectionFromVelocity()
+        private void AssignDirectionFromInput(I2DInput input)
         {
-            bool isMoving = this.Velocity.LengthSquared() > 0;
+            var inputVelocity = new Vector2(input.X, input.Y);
+
+            bool isMoving = inputVelocity.LengthSquared() > 0;
 
             // Only attempt to assign a velocity if actually moving, otherwise
             // just keep the old value
             if (isMoving)
             {
+                AnalogDirection = inputVelocity;
 
                 bool isMovingHorizontally = Math.Abs(this.XVelocity) > Math.Abs(this.YVelocity);
 
@@ -173,7 +192,33 @@ namespace ArenaGame.Entities
 
         private void PerformRangedAttack()
         {
-            throw new NotImplementedException();
+            var attackArea = Factories.AttackAreaFactory.CreateNew();
+            attackArea.Effects = this.rangedAttackEffects;
+            attackArea.Position = this.Position;
+
+            const float projectileSpeed = 400;
+
+            switch (this.Direction)
+            {
+                case Direction.Up:
+                    attackArea.YVelocity = projectileSpeed;
+                    break;
+                case Direction.Down:
+                    attackArea.YVelocity = -projectileSpeed;
+
+                    break;
+                case Direction.Left:
+                    attackArea.XVelocity = -projectileSpeed;
+
+                    break;
+                case Direction.Right:
+                    attackArea.XVelocity = projectileSpeed;
+
+                    break;
+            }
+
+            const float secondsLasting = 1;
+            attackArea.Call(attackArea.Destroy).After(secondsLasting);
         }
 
 		private void CustomDestroy()
@@ -188,11 +233,6 @@ namespace ArenaGame.Entities
 
         }
 
-        public int Health
-        {
-            get;
-            set;
-        }
 
         /// <summary>
         /// The list of effects placed on this by other targets, like if the target is on fire, or if it is poisoned

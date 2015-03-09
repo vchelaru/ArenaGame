@@ -1,6 +1,7 @@
 #region Usings
 
 using System;
+using System.Linq;
 using System.Collections.Generic;
 using System.Text;
 using FlatRedBall;
@@ -21,6 +22,7 @@ using Keys = Microsoft.Xna.Framework.Input.Keys;
 using Vector3 = Microsoft.Xna.Framework.Vector3;
 using Texture2D = Microsoft.Xna.Framework.Graphics.Texture2D;
 using ArenaGame.Entities.Interfaces;
+using Microsoft.Xna.Framework;
 
 #endif
 #endregion
@@ -30,6 +32,8 @@ namespace ArenaGame.Entities
 	public partial class Enemy : ICharacter
 	{
         public int health;
+
+        ICharacter target;
 
         public int Health
         {
@@ -59,9 +63,22 @@ namespace ArenaGame.Entities
 
 		private void CustomActivity()
 		{
+            MovementActivity();
+
             AttachableEffectActivity();
 
 		}
+
+        private void MovementActivity()
+        {
+            if(target != null)
+            {
+                var directionVector = new Vector2(this.target.X - this.X, this.target.Y - this.Y);
+                directionVector.Normalize();
+
+                this.Velocity = new Vector3(directionVector * this.EnemyInfo.Speed, 0);
+            }
+        }
 
         private void AttachableEffectActivity()
         {
@@ -83,6 +100,10 @@ namespace ArenaGame.Entities
 
         }
 
+        public void AcquireTarget(IEnumerable<ICharacter> possibleTargets)
+        {
+            target = possibleTargets.FirstOrDefault();
+        }
 
         private void ReactToHealthChanged()
         {

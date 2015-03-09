@@ -30,6 +30,13 @@
               <AttachToContainer>true</AttachToContainer>
               <IndependentOfCamera>true</IndependentOfCamera>
             </NamedObjectSave>
+            <NamedObjectSave>
+              <SourceType>Entity</SourceType>
+              <SourceClassType>Entities\Character</SourceClassType>
+              <InstanceName>TestCharacter2</InstanceName>
+              <AttachToContainer>true</AttachToContainer>
+              <IndependentOfCamera>true</IndependentOfCamera>
+            </NamedObjectSave>
           </ContainedObjects>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
@@ -378,7 +385,16 @@
       <GenerateCode>true</GenerateCode>
     </CustomClassSave>
   </CustomClasses>
-  <TranslatedFiles />
+  <TranslatedFiles>
+    <TranslatedFileSave>
+      <FileName>Screens/GameScreen.cs</FileName>
+      <TranslationStyle>PerformTranslate</TranslationStyle>
+    </TranslatedFileSave>
+    <TranslatedFileSave>
+      <FileName>Screens/GameScreen.Generated.cs</FileName>
+      <TranslationStyle>PerformTranslate</TranslationStyle>
+    </TranslatedFileSave>
+  </TranslatedFiles>
   <ApplyToFixedResolutionPlatforms>true</ApplyToFixedResolutionPlatforms>
   <ExternallyBuiltFileDirectory>../../</ExternallyBuiltFileDirectory>
 </GlueProjectSave>
