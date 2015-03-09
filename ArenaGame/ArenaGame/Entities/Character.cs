@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using ArenaGame.CharacterProfiles;
 using FlatRedBall;
 using FlatRedBall.Input;
 using FlatRedBall.Instructions;
@@ -39,7 +40,6 @@ namespace ArenaGame.Entities
 
 	public partial class Character : ICharacter
 	{
-        
         List<AttackEffectBase> meleeAttackEffects = new List<AttackEffectBase>();
         List<AttackEffectBase> rangedAttackEffects = new List<AttackEffectBase>();
         Vector2 analogDirection;
@@ -47,14 +47,9 @@ namespace ArenaGame.Entities
         public I2DInput Movement { get; set; }
         public IPressableInput MeleeAttack { get; set; }
         public IPressableInput RangedAttack { get; set; }
-        
-        public int Health
-        {
-            get;
-            set;
-        }
 
-        public Direction Direction
+
+	    public Direction Direction
         {
             get;
             set;
@@ -71,8 +66,7 @@ namespace ArenaGame.Entities
             // temp!
             this.Health = 100;
 
-            var instantDamage = new InstantDamage();
-            instantDamage.Amount = 10;
+            var instantDamage = new InstantDamage {Amount = 10};
             this.meleeAttackEffects.Add(instantDamage);
             this.rangedAttackEffects.Add(instantDamage);
 
@@ -216,7 +210,12 @@ namespace ArenaGame.Entities
         /// The list of effects placed on this by other targets, like if the target is on fire, or if it is poisoned
         /// </summary>
         List<AbilityRuntimes.AttachableEffect> effects = new List<AbilityRuntimes.AttachableEffect>();
-        public List<AbilityRuntimes.AttachableEffect> Effects
+
+	    public CharacterProfile Profile { get; set; }
+
+	    public int Health { get; set; }
+
+	    public List<AbilityRuntimes.AttachableEffect> Effects
         {
             get { return effects; }
         }

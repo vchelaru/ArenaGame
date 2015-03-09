@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbilityRuntimes\AttachableEffect.cs" />
+    <Compile Include="CharacterProfiles\CharacterProfile.cs" />
     <Compile Include="DataTypes\AttackEffects\AttackEffectBase.cs" />
     <Compile Include="DataTypes\AttackEffects\InstantDamage.cs" />
     <Compile Include="DataTypes\EnemyInfo.Generated.cs" />
