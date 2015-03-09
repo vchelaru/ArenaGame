@@ -146,6 +146,7 @@
     <Compile Include="Entities\Interfaces\ICharacter.cs" />
     <Compile Include="Factories\AttackAreaFactory.Generated.cs" />
     <Compile Include="Factories\EnemyFactory.Generated.cs" />
+    <Compile Include="Factories\EnemySpawnerFactory.Generated.cs" />
     <Compile Include="GlobalContent.Generated.cs" />
     <Compile Include="Performance\IEntityFactory.Generated.cs" />
     <Compile Include="Performance\IPoolable.Generated.cs" />

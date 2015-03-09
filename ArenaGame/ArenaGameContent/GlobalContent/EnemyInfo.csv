@@ -1,2 +1,2 @@
-"Name (string, required)",Health (int),Speed (float)
-TestMonster,25,30
+"Name (string, required)",Health (int),Speed (float),Experience (int)
+TestMonster,25,30,10

@@ -2,9 +2,9 @@
 <GlueProjectSave xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <In2D>true</In2D>
   <RunFullscreen>false</RunFullscreen>
-  <SetResolution>false</SetResolution>
-  <ResolutionWidth>800</ResolutionWidth>
-  <ResolutionHeight>600</ResolutionHeight>
+  <SetResolution>true</SetResolution>
+  <ResolutionWidth>1024</ResolutionWidth>
+  <ResolutionHeight>768</ResolutionHeight>
   <SetOrthogonalResolution>false</SetOrthogonalResolution>
   <OrthogonalWidth>800</OrthogonalWidth>
   <OrthogonalHeight>600</OrthogonalHeight>
@@ -93,30 +93,6 @@
           <SourceClassGenericType>Entities\EnemySpawner</SourceClassGenericType>
           <InstanceName>EnemySpawnerList</InstanceName>
           <AttachToContainer>true</AttachToContainer>
-          <ContainedObjects>
-            <NamedObjectSave>
-              <CustomProperty>
-                <Type>float</Type>
-                <Member>X</Member>
-                <ValueAsFloat>150</ValueAsFloat>
-              </CustomProperty>
-              <CustomProperty>
-                <Type>float</Type>
-                <Member>Width</Member>
-                <ValueAsFloat>50</ValueAsFloat>
-              </CustomProperty>
-              <CustomProperty>
-                <Type>float</Type>
-                <Member>Height</Member>
-                <ValueAsFloat>150</ValueAsFloat>
-              </CustomProperty>
-              <SourceType>Entity</SourceType>
-              <SourceClassType>Entities\EnemySpawner</SourceClassType>
-              <InstanceName>TestSpawner</InstanceName>
-              <AttachToContainer>true</AttachToContainer>
-              <IndependentOfCamera>true</IndependentOfCamera>
-            </NamedObjectSave>
-          </ContainedObjects>
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
         <NamedObjectSave>
@@ -436,6 +412,7 @@
           <IndependentOfCamera>true</IndependentOfCamera>
         </NamedObjectSave>
       </NamedObjects>
+      <CreatedByOtherEntities>true</CreatedByOtherEntities>
       <Is2D>true</Is2D>
     </EntitySave>
   </Entities>
@@ -453,7 +430,13 @@
   </GlobalContentSettingsSave>
   <SyncedProjects />
   <StartUpScreen>Screens\GameScreen</StartUpScreen>
-  <ResolutionPresets />
+  <ResolutionPresets>
+    <ResolutionValues>
+      <Name>1024x768</Name>
+      <Width>1024</Width>
+      <Height>768</Height>
+    </ResolutionValues>
+  </ResolutionPresets>
   <PerformanceSettingsSave>
     <ThrowExceptionOnPostInitializeContentLoad>false</ThrowExceptionOnPostInitializeContentLoad>
     <RecordInitializeSegments>false</RecordInitializeSegments>

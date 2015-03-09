@@ -50,7 +50,7 @@ namespace ArenaGame.Entities
 
         private void TryPerformSpawn()
         {
-            bool shouldSpawn = TimeManager.SecondsSince(lastSpawn) > 5;
+            bool shouldSpawn = TimeManager.SecondsSince(lastSpawn) > 15;
             if(shouldSpawn)
             {
                 lastSpawn = TimeManager.CurrentTime;
