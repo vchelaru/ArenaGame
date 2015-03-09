@@ -44,16 +44,21 @@ namespace ArenaGame.Screens
 
         private void DebugInitialize()
         {
-            const bool useKeyboard = false;
+            const bool useKeyboard = true;
 
             if (useKeyboard)
             {
-
                 this.TestCharacter1.Movement = InputManager.Keyboard.Get2DInput(
                     Keys.A, Keys.D, Keys.W, Keys.S);
 
+                this.TestCharacter2.Movement = InputManager.Keyboard.Get2DInput(Keys.Left, Keys.Right, Keys.Up,
+                    Keys.Down);
+
                 this.TestCharacter1.RangedAttack = InputManager.Keyboard.GetKey(Keys.R);
                 this.TestCharacter1.MeleeAttack = InputManager.Keyboard.GetKey(Keys.Space);
+
+                this.TestCharacter2.RangedAttack = InputManager.Keyboard.GetKey(Keys.P);
+                this.TestCharacter2.MeleeAttack = InputManager.Keyboard.GetKey(Keys.O);
             }
             else
             {
