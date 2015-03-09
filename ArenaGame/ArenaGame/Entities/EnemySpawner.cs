@@ -48,11 +48,13 @@ namespace ArenaGame.Entities
 
 		}
 
+	    private bool spawn = true;
         private void TryPerformSpawn()
         {
-            bool shouldSpawn = TimeManager.SecondsSince(lastSpawn) > 5;
+            bool shouldSpawn = spawn && TimeManager.SecondsSince(lastSpawn) > 5;
             if(shouldSpawn)
             {
+                spawn = false;
                 lastSpawn = TimeManager.CurrentTime;
 
                 SpawnEnemy(GlobalContent.EnemyInfo[EnemyInfo.TestMonster]);

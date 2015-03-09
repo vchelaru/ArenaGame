@@ -120,6 +120,11 @@ namespace ArenaGame.Entities
 	            animationType = "Walk";
 	        }
 
+	        if (Attacking)
+	        {
+	            animationType = "Attack";
+	        }
+
 	        return animationType + Direction;
 
 	    }
@@ -139,11 +144,11 @@ namespace ArenaGame.Entities
 
             AssignDirectionFromInput(Movement);
 
-            if(MeleeAttack.WasJustPressed)
+            if(!Attacking && MeleeAttack.WasJustPressed)
             {
                 PerformMeleeAttack();
             }
-            if(RangedAttack.WasJustPressed)
+            if(!Attacking && RangedAttack.WasJustPressed)
             {
                 PerformRangedAttack();
             }
@@ -192,7 +197,6 @@ namespace ArenaGame.Entities
 
         private void PerformMeleeAttack()
         {
-
             var attackArea = Factories.AttackAreaFactory.CreateNew();
             attackArea.Effects = this.meleeAttackEffects;
             attackArea.Position = this.Position;
@@ -217,12 +221,16 @@ namespace ArenaGame.Entities
                     break;
             }
 
-            const float secondsLasting = .3f;
+            const float secondsLasting = .5f;
+            this.Attacking = true;
             attackArea.Call(attackArea.Destroy).After(secondsLasting);
+            this.Set("Attacking").To(false).After(secondsLasting);
 
         }
 
-        private void PerformRangedAttack()
+	    public bool Attacking { get; set; }
+
+	    private void PerformRangedAttack()
         {
             var attackArea = Factories.AttackAreaFactory.CreateNew();
             attackArea.Effects = this.rangedAttackEffects;
@@ -232,7 +240,9 @@ namespace ArenaGame.Entities
 
             attackArea.Velocity = new Vector3(analogDirection * projectileSpeed, 0);
             const float secondsLasting = 1;
+	        Attacking = true;
             attackArea.Call(attackArea.Destroy).After(secondsLasting);
+	        this.Set("Attacking").To(false).After(.5f);
         }
 
 		private void CustomDestroy()
@@ -252,6 +262,8 @@ namespace ArenaGame.Entities
         /// The list of effects placed on this by other targets, like if the target is on fire, or if it is poisoned
         /// </summary>
         List<AbilityRuntimes.AttachableEffect> effects = new List<AbilityRuntimes.AttachableEffect>();
+
+	    
 
 	    public CharacterProfile Profile { get; set; }
 
