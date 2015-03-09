@@ -129,6 +129,7 @@
     <Compile Include="Entities\Character.Generated.cs">
       <DependentUpon>Character.cs</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Direction.cs" />
     <Compile Include="Entities\Enemy.cs" />
     <Compile Include="Entities\Enemy.Event.cs">
       <DependentUpon>Enemy.cs</DependentUpon>

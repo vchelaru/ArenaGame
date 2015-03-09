@@ -30,14 +30,6 @@ using Microsoft.Xna.Framework;
 
 namespace ArenaGame.Entities
 {
-    public enum Direction
-    {
-        Up,
-        Down,
-        Left,
-        Right
-    }
-
 	public partial class Character : ICharacter
 	{
         List<AttackEffectBase> meleeAttackEffects = new List<AttackEffectBase>();
@@ -53,7 +45,6 @@ namespace ArenaGame.Entities
         {
             get;
             set;
-
         }
 
         /// <summary>

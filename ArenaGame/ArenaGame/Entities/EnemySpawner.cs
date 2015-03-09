@@ -50,7 +50,7 @@ namespace ArenaGame.Entities
 
         private void TryPerformSpawn()
         {
-            bool shouldSpawn = TimeManager.SecondsSince(lastSpawn) > 15;
+            bool shouldSpawn = TimeManager.SecondsSince(lastSpawn) > 5;
             if(shouldSpawn)
             {
                 lastSpawn = TimeManager.CurrentTime;
@@ -75,6 +75,7 @@ namespace ArenaGame.Entities
         {
             var newEnemy = Factories.EnemyFactory.CreateNew(this.LayerProvidedByContainer);
             newEnemy.Position = this.AxisAlignedRectangleInstance.GetRandomPositionInThis();
+            newEnemy.Z = 6;
 
             newEnemy.EnemyInfo = enemyType;
 

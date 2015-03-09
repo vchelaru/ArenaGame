@@ -29,8 +29,14 @@ using Microsoft.Xna.Framework;
 
 namespace ArenaGame.Entities
 {
-	public partial class Enemy : ICharacter
+    public partial class Enemy : ICharacter
 	{
+        public Direction Direction
+        {
+            get;
+            set;
+        }
+
         public int health;
 
         ICharacter target;
@@ -64,29 +70,104 @@ namespace ArenaGame.Entities
 		private void CustomActivity()
 		{
             MovementActivity();
+		    AssignDirectionFromMovement();
+            SetAnimations(EnemyAnimations);
 
             AttachableEffectActivity();
 
 		}
 
+        private void AssignDirectionFromMovement()
+        {
+            bool isMoving = Velocity.LengthSquared() > 0;
+
+            // Only attempt to assign a velocity if actually moving, otherwise
+            // just keep the old value
+            if (isMoving)
+            {
+                var analogDirection = Velocity;
+                analogDirection.Normalize();
+                bool isMovingHorizontally = Math.Abs(XVelocity) > Math.Abs(YVelocity);
+
+                if (isMovingHorizontally)
+                {
+                    bool isMovingLeft = XVelocity < 0;
+                    if (isMovingLeft)
+                    {
+                        Direction = Entities.Direction.Left;
+                    }
+                    else
+                    {
+                        Direction = Entities.Direction.Right;
+                    }
+                }
+                else
+                {
+                    bool isMovingDown = YVelocity < 0;
+                    if (isMovingDown)
+                    {
+                        Direction = Entities.Direction.Down;
+                    }
+                    else
+                    {
+                        Direction = Entities.Direction.Up;
+                    }
+                }
+            }
+        }
+
+
+        public virtual void SetAnimations(AnimationChainList animations)
+        {
+            if (MainSprite != null)
+            {
+                string chainToSet = GetChainToSet();
+
+                if (!string.IsNullOrEmpty(chainToSet))
+                {
+                    bool differs = MainSprite.CurrentChainName == null ||
+                        MainSprite.CurrentChainName != chainToSet;
+
+                    if (differs)
+                    {
+                        MainSprite.SetAnimationChain(animations[chainToSet]);
+                    }
+                }
+            }
+        }
+
+        private string GetChainToSet()
+        {
+            string animationType = "Idle";
+
+            bool isMoving = Velocity.LengthSquared() > 0;
+            if (isMoving)
+            {
+                animationType = "Walk";
+            }
+
+            return animationType + Direction;
+
+        }
+
         private void MovementActivity()
         {
             if(target != null)
             {
-                var directionVector = new Vector2(this.target.X - this.X, this.target.Y - this.Y);
+                var directionVector = new Vector2(target.X - X, target.Y - Y);
 
                 if (directionVector.LengthSquared() > 0)
                 {
                     directionVector.Normalize();
 
-                    this.Velocity = new Vector3(directionVector * this.EnemyInfo.Speed, 0);
+                    Velocity = new Vector3(directionVector * EnemyInfo.Speed, 0);
                 }
             }
         }
 
         private void AttachableEffectActivity()
         {
-            foreach(var item in this.Effects)
+            foreach(var item in Effects)
             {
                 item.ApplyUpdate();
             }
@@ -111,9 +192,9 @@ namespace ArenaGame.Entities
 
         private void ReactToHealthChanged()
         {
-            if(this.Health <= 0)
+            if(Health <= 0)
             {
-                this.Destroy();
+                Destroy();
             }
         }
 
