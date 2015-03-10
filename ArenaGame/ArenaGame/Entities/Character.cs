@@ -201,22 +201,23 @@ namespace ArenaGame.Entities
             attackArea.Effects = this.meleeAttackEffects;
             attackArea.Position = this.Position;
             const float attackOffset = 16;
+            attackArea.AttachTo(this, true);
 
             switch (this.Direction)
             {
                 case Direction.Up:
-                    attackArea.Y += attackOffset;
+                    attackArea.RelativeY = attackOffset;
                     break;
                 case Direction.Down:
-                    attackArea.Y -= attackOffset;
+                    attackArea.RelativeY = -attackOffset;
 
                     break;
                 case Direction.Left:
-                    attackArea.X -= attackOffset;
+                    attackArea.RelativeX = -attackOffset;
 
                     break;
                 case Direction.Right:
-                    attackArea.X += attackOffset;
+                    attackArea.RelativeX = attackOffset;
 
                     break;
             }
