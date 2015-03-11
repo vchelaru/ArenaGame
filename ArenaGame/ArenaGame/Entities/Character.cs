@@ -137,24 +137,33 @@ namespace ArenaGame.Entities
             }
         }
 
-        private void InputActivity()
-        {
-            this.XVelocity = Movement.X * Speed;
-            this.YVelocity = Movement.Y * Speed;
+	    private void InputActivity()
+	    {
+	        if (!Attacking)
+	        {
+	            this.XVelocity = Movement.X*Speed;
+	            this.YVelocity = Movement.Y*Speed;
 
-            AssignDirectionFromInput(Movement);
+	            AssignDirectionFromInput(Movement);
 
-            if(!Attacking && MeleeAttack.WasJustPressed)
-            {
-                PerformMeleeAttack();
-            }
-            if(!Attacking && RangedAttack.WasJustPressed)
-            {
-                PerformRangedAttack();
-            }
-        }
 
-        private void AssignDirectionFromInput(I2DInput input)
+	            if (MeleeAttack.WasJustPressed)
+	            {
+	                PerformMeleeAttack();
+	            }
+	            if (RangedAttack.WasJustPressed)
+	            {
+	                PerformRangedAttack();
+	            }
+	        }
+	        else
+	        {
+	            this.XVelocity = 0;
+	            this.YVelocity = 0;
+	        }
+	    }
+
+	    private void AssignDirectionFromInput(I2DInput input)
         {
             var inputVelocity = new Vector2(input.X, input.Y);
 
@@ -222,7 +231,7 @@ namespace ArenaGame.Entities
                     break;
             }
 
-            const float secondsLasting = .5f;
+            const float secondsLasting = .3f;
             this.Attacking = true;
             attackArea.Call(attackArea.Destroy).After(secondsLasting);
             this.Set("Attacking").To(false).After(secondsLasting);
@@ -243,7 +252,7 @@ namespace ArenaGame.Entities
             const float secondsLasting = 1;
 	        Attacking = true;
             attackArea.Call(attackArea.Destroy).After(secondsLasting);
-	        this.Set("Attacking").To(false).After(.5f);
+	        this.Set("Attacking").To(false).After(.3f);
         }
 
 		private void CustomDestroy()

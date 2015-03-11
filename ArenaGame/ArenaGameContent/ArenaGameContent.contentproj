@@ -49,6 +49,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>CharacterAnimations</Name>
     </None>
+    <None Include="Entities\Character\link.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <Name>link</Name>
+    </None>
     <None Include="Entities\Enemy\EnemyAnimations.achx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       <Name>EnemyAnimations</Name>
